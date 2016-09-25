@@ -7,7 +7,7 @@ var iot = {};
 
 var awsIot = require('aws-iot-device-sdk');
 
-var myThingName = 'Raspi3_2';
+var myThingName = 'Raspi3_A1';
 
  
 //create thing shadows with keys and certs
