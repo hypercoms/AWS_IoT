@@ -322,11 +322,11 @@ SensorTag.discover(function(tag) {
             // console.log('pressure'+pressure);
 
 
-        clientTokenIP = thingShadows.update(pressure, {
+        clientTokenIP = thingShadows.update(myThingName, {
             "state": {
                 "reported": {
                 "thingName":myThingName,
-                "sensor_pressure":temperature.toFixed(1)
+                "sensor_pressure":pressure.toFixed(1)
                 }
             }
         });
@@ -359,7 +359,7 @@ SensorTag.discover(function(tag) {
         tag.on('luxometerChange',function(lux){
          // console.log('lux  = %d G', lux.toFixed(1));
 
-        clientTokenIP = thingShadows.update(pressure, {
+        clientTokenIP = thingShadows.update(myThingName, {
             "state": {
                 "reported": {
                 "thingName":myThingName,
