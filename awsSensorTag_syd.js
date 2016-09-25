@@ -2,7 +2,18 @@ var iot = {};
 //importing aws iot library
 
 
- 
+//update values with:
+            //  clientTokenIP = thingShadows.update(myThingName, {
+            //     "state": {
+            //     "reported": {
+            //         "thingName":"ss9",
+            //         "actuator_Laser":d.toString().trim(),
+            //         "actuator_Vibratio":"ON",
+            //         "sensorLight1":45,
+            //         "sensorTemp1": 435
+            //         }
+            //     }
+            // });
 
 
 var awsIot = require('aws-iot-device-sdk');
@@ -161,16 +172,16 @@ thingShadows.on('connect', function() {
             d.toString().trim() + "]");
                
             clientTokenIP = thingShadows.update(myThingName, {
-        "state": {
-            "reported": {
-            "thingName":"ss9",
-            "actuator_Laser":d.toString().trim(),
-            "actuator_Vibratio":"ON",
-            "sensorLight1":45,
-            "sensorTemp1": 435
-        }
-    }
-    });
+                "state": {
+                "reported": {
+                    "thingName":"ss9",
+                    "actuator_Laser":d.toString().trim(),
+                    "actuator_Vibratio":"ON",
+                    "sensorLight1":45,
+                    "sensorTemp1": 435
+                    }
+                }
+            });
 
             console.log("Update:" + clientTokenIP);
 
@@ -226,17 +237,14 @@ SensorTag.discover(function(tag) {
 
 
 
-         clientTokenIP = thingShadows.update(myThingName, {
+        clientTokenIP = thingShadows.update(myThingName, {
             "state": {
                 "reported": {
                 "thingName":myThingName,
                 "sensor_objTemp":objectTemp.toFixed(1),
                 "sensor_ambientTemp": ambientTemp.toFixed(1)
+                }
             }
-
-                // "actuator_Laser":d.toString().trim(),
-                // "actuator_Vibratio":"ON",
-        }
         });
 
             console.log("Update:" + clientTokenIP);
@@ -248,16 +256,40 @@ SensorTag.discover(function(tag) {
    // When you get an accelermeter change, print it out:
     function listenForAcc() {
         tag.on('accelerometerChange', function(x, y, z) {
-         console.log('\tx = %d G', x.toFixed(1));
-         console.log('\ty = %d G', y.toFixed(1));
-         console.log('\tz = %d G', z.toFixed(1));
+         // console.log('\tx = %d G', x.toFixed(1));
+         // console.log('\ty = %d G', y.toFixed(1));
+         // console.log('\tz = %d G', z.toFixed(1));
+
+        clientTokenIP = thingShadows.update(myThingName, {
+            "state": {
+                "reported": {
+                "thingName":myThingName,
+                "sensor_accelerometerX":x.toFixed(1),
+                "sensor_accelerometerY":y.toFixed(1),
+                "sensor_accelerometerZ":z.toFixed(1),
+
+                }
+            }
+        });
+
        });
     }
 
     function listenForHumidity() {
         tag.on('humidityChange', function(temperature, humidity){
-            console.log('temperature'+temperature);
-            console.log('humidity'+humidity);
+            // console.log('temperature'+temperature);
+            // console.log('humidity'+humidity);
+
+        clientTokenIP = thingShadows.update(myThingName, {
+            "state": {
+                "reported": {
+                "thingName":myThingName,
+                "sensor_humidity":temperature.toFixed(1),
+                "sensor_temperature": humidity.toFixed(1)
+                }
+            }
+        });
+
 
         });
         
@@ -265,30 +297,77 @@ SensorTag.discover(function(tag) {
 
     function listenForMagnetometer(){
         tag.on('magnetometerChange', function(x, y, z){
-         console.log('\tmag x = %d G', x.toFixed(1));
-         console.log('\tmag y = %d G', y.toFixed(1));
-         console.log('\tmag z = %d G', z.toFixed(1));
+         // console.log('\tmag x = %d G', x.toFixed(1));
+         // console.log('\tmag y = %d G', y.toFixed(1));
+         // console.log('\tmag z = %d G', z.toFixed(1));
+
+
+        clientTokenIP = thingShadows.update(myThingName, {
+            "state": {
+                "reported": {
+                "thingName":myThingName,
+                "sensor_magneticX":x.toFixed(1),
+                "sensor_magneticY":y.toFixed(1),
+                "sensor_magneticZ":z.toFixed(1),
+
+                }
+            }
+        });
+
         });
     }
 
     function listenForBarometric(){
         tag.on('barometricPressureChange', function(pressure){
-            console.log('pressure'+pressure);
+            // console.log('pressure'+pressure);
+
+
+        clientTokenIP = thingShadows.update(pressure, {
+            "state": {
+                "reported": {
+                "thingName":myThingName,
+                "sensor_pressure":temperature.toFixed(1)
+                }
+            }
+        });
 
         });
     }
 
     function listenForGyro(){
         tag.on('gyroscopeChange', function(x, y, z){
-         console.log('\tgyro x = %d G', x.toFixed(1));
-         console.log('\tgyro y = %d G', y.toFixed(1));
-         console.log('\tgyro z = %d G', z.toFixed(1));
+         // console.log('\tgyro x = %d G', x.toFixed(1));
+         // console.log('\tgyro y = %d G', y.toFixed(1));
+         // console.log('\tgyro z = %d G', z.toFixed(1));
+
+        clientTokenIP = thingShadows.update(myThingName, {
+            "state": {
+                "reported": {
+                "thingName":myThingName,
+                "sensor_gyroX":x.toFixed(1),
+                "sensor_gyroY":y.toFixed(1),
+                "sensor_gyroZ":z.toFixed(1),
+
+                }
+            }
+        });
+
         });
     }
 
     function listenForLux(){
         tag.on('luxometerChange',function(lux){
-         console.log('lux  = %d G', lux.toFixed(1));
+         // console.log('lux  = %d G', lux.toFixed(1));
+
+        clientTokenIP = thingShadows.update(pressure, {
+            "state": {
+                "reported": {
+                "thingName":myThingName,
+                "sensor_lux":lux.toFixed(1)
+                }
+            }
+        });
+
         });
     }
 
